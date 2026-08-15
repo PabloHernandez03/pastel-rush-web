@@ -1,5 +1,11 @@
 // Tiny fetch wrapper. Reads the JWT from localStorage and adds it to requests.
 
+// In dev, Vite proxies /api to the local backend (see vite.config.js), so
+// leaving this empty keeps relative paths working. In production the frontend
+// and backend are separate Render services, so VITE_API_URL (set at build
+// time in Render's Static Site env vars) points straight at the backend.
+const API_BASE = import.meta.env.VITE_API_URL || '';
+
 const TOKEN_KEY = 'pastelrush_token';
 
 export function getToken() {
@@ -15,7 +21,7 @@ export async function api(path, { method = 'GET', body, auth = true } = {}) {
   const token = getToken();
   if (auth && token) headers.Authorization = `Bearer ${token}`;
 
-  const res = await fetch(`/api${path}`, {
+  const res = await fetch(`${API_BASE}/api${path}`, {
     method,
     headers,
     body: body ? JSON.stringify(body) : undefined,
