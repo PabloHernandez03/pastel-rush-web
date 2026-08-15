@@ -20,7 +20,7 @@ import { api } from '../../lib/api';
 import { Card, StatTile, Spinner, EmptyState } from '../../components/ui';
 import { worldName } from '../../lib/format';
 
-const WORLD_COLORS = ['#f472b6', '#a78bfa', '#34d399', '#fbbf24', '#38bdf8'];
+const WORLD_COLORS = ['#f472b6', '#c99bf5', '#4ade80', '#ffc23d', '#fb923c'];
 
 export default function ResumenTab() {
   const [data, setData] = useState(null);
@@ -58,11 +58,11 @@ export default function ResumenTab() {
           ) : (
             <ResponsiveContainer width="100%" height={240}>
               <BarChart data={dayData} margin={{ top: 4, right: 8, left: -20, bottom: 0 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#223055" vertical={false} />
-                <XAxis dataKey="label" tick={{ fill: '#8a97c2', fontSize: 12 }} axisLine={false} tickLine={false} />
-                <YAxis tick={{ fill: '#8a97c2', fontSize: 12 }} axisLine={false} tickLine={false} allowDecimals={false} />
-                <Tooltip content={<ChartTooltip unit="partidas" />} cursor={{ fill: 'rgba(139,92,246,0.08)' }} />
-                <Bar dataKey="partidas" fill="#8b5cf6" radius={[6, 6, 0, 0]} />
+                <CartesianGrid strokeDasharray="3 3" stroke="#43301f" vertical={false} />
+                <XAxis dataKey="label" tick={{ fill: '#b6906f', fontSize: 12 }} axisLine={false} tickLine={false} />
+                <YAxis tick={{ fill: '#b6906f', fontSize: 12 }} axisLine={false} tickLine={false} allowDecimals={false} />
+                <Tooltip content={<ChartTooltip unit="partidas" />} cursor={{ fill: 'rgba(245,166,35,0.10)' }} />
+                <Bar dataKey="partidas" fill="#f5a623" radius={[6, 6, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           )}
@@ -75,17 +75,17 @@ export default function ResumenTab() {
           ) : (
             <ResponsiveContainer width="100%" height={240}>
               <BarChart data={worldData} layout="vertical" margin={{ top: 4, right: 16, left: 8, bottom: 0 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#223055" horizontal={false} />
-                <XAxis type="number" tick={{ fill: '#8a97c2', fontSize: 12 }} axisLine={false} tickLine={false} allowDecimals={false} />
+                <CartesianGrid strokeDasharray="3 3" stroke="#43301f" horizontal={false} />
+                <XAxis type="number" tick={{ fill: '#b6906f', fontSize: 12 }} axisLine={false} tickLine={false} allowDecimals={false} />
                 <YAxis
                   type="category"
                   dataKey="name"
                   width={130}
-                  tick={{ fill: '#b9c4e6', fontSize: 12 }}
+                  tick={{ fill: '#e6cba9', fontSize: 12 }}
                   axisLine={false}
                   tickLine={false}
                 />
-                <Tooltip content={<ChartTooltip unit="partidas" />} cursor={{ fill: 'rgba(139,92,246,0.08)' }} />
+                <Tooltip content={<ChartTooltip unit="partidas" />} cursor={{ fill: 'rgba(245,166,35,0.10)' }} />
                 <Bar dataKey="partidas" radius={[0, 6, 6, 0]}>
                   {worldData.map((_, i) => (
                     <Cell key={i} fill={WORLD_COLORS[i % WORLD_COLORS.length]} />

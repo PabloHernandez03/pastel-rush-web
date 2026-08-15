@@ -12,7 +12,7 @@ import { api } from '../../lib/api';
 import { Card, Spinner, EmptyState } from '../../components/ui';
 import { worldName, WORLD_NAMES } from '../../lib/format';
 
-const WORLD_COLORS = ['#f472b6', '#a78bfa', '#34d399', '#fbbf24', '#38bdf8'];
+const WORLD_COLORS = ['#f472b6', '#c99bf5', '#4ade80', '#ffc23d', '#fb923c'];
 
 export default function RendimientoTab() {
   const [data, setData] = useState(null);
@@ -54,10 +54,10 @@ export default function RendimientoTab() {
         ) : (
           <ResponsiveContainer width="100%" height={320}>
             <RadarChart data={rows} outerRadius={120}>
-              <PolarGrid stroke="#2f4070" />
-              <PolarAngleAxis dataKey="name" tick={{ fill: '#b9c4e6', fontSize: 12 }} />
+              <PolarGrid stroke="#5c422b" />
+              <PolarAngleAxis dataKey="name" tick={{ fill: '#e6cba9', fontSize: 12 }} />
               <Tooltip content={<RadarTooltip />} />
-              <Radar dataKey="punt_media" stroke="#8b5cf6" fill="#8b5cf6" fillOpacity={0.35} />
+              <Radar dataKey="punt_media" stroke="#f5a623" fill="#f5a623" fillOpacity={0.32} />
             </RadarChart>
           </ResponsiveContainer>
         )}

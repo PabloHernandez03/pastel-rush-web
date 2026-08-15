@@ -2,6 +2,7 @@ import { Router } from 'express';
 import bcrypt from 'bcryptjs';
 import { pool } from '../db/pool.js';
 import { requireAuth, signToken } from '../middleware/auth.js';
+import { ah } from '../utils/async-handler.js';
 
 export const authRouter = Router();
 
@@ -96,10 +97,14 @@ authRouter.post('/login', async (req, res) => {
 });
 
 // GET /api/auth/me
-authRouter.get('/me', requireAuth, async (req, res) => {
-  const [rows] = await pool.query(`SELECT ${PUBLIC_USER_FIELDS} FROM users WHERE id = ?`, [
-    req.user.id,
-  ]);
-  if (!rows.length) return res.status(404).json({ error: 'Usuario no encontrado' });
-  res.json({ user: rows[0] });
-});
+authRouter.get(
+  '/me',
+  requireAuth,
+  ah(async (req, res) => {
+    const [rows] = await pool.query(`SELECT ${PUBLIC_USER_FIELDS} FROM users WHERE id = ?`, [
+      req.user.id,
+    ]);
+    if (!rows.length) return res.status(404).json({ error: 'Usuario no encontrado' });
+    res.json({ user: rows[0] });
+  })
+);

@@ -1,25 +1,30 @@
 @import 'tailwindcss';
 
-/* Pastel Rush theme tokens. Dark, bakery-tinted palette matching the game. */
+/* Pastel Rush theme — warm bakery palette matching the game (cream text +
+   honey/berry accents over a chocolate-dark surface). */
 @theme {
-  --color-ink-950: #0b1020;
-  --color-ink-900: #0f1629;
-  --color-ink-850: #131c33;
-  --color-ink-800: #182240;
-  --color-ink-700: #223055;
-  --color-ink-600: #2f4070;
+  /* Surfaces: warm chocolate ramp (was navy). */
+  --color-ink-950: #160f0b;
+  --color-ink-900: #1d140e;
+  --color-ink-850: #251a12;
+  --color-ink-800: #2f2116;
+  --color-ink-700: #43301f;
+  --color-ink-600: #5c422b;
 
-  --color-frost-100: #eef2ff;
-  --color-frost-300: #b9c4e6;
-  --color-frost-400: #8a97c2;
+  /* Text: warm cream / tan. */
+  --color-frost-100: #fbe9d4;
+  --color-frost-300: #e6cba9;
+  --color-frost-400: #b6906f;
 
+  /* Accents from the game (pink, plum, green, honey, caramel). */
   --color-berry-400: #f472b6;
   --color-berry-500: #ec4899;
-  --color-grape-400: #a78bfa;
-  --color-grape-500: #8b5cf6;
-  --color-mint-400: #34d399;
-  --color-honey-400: #fbbf24;
-  --color-honey-500: #f59e0b;
+  --color-grape-400: #c99bf5;
+  --color-grape-500: #a570e6;
+  --color-mint-400: #4ade80;
+  --color-honey-400: #ffc23d;
+  --color-honey-500: #f5a623;
+  --color-caramel-400: #fb923c;
 }
 
 html,
@@ -31,7 +36,7 @@ body,
 body {
   margin: 0;
   background:
-    radial-gradient(1200px 600px at 15% -10%, rgba(139, 92, 246, 0.16), transparent 60%),
+    radial-gradient(1200px 600px at 15% -10%, rgba(245, 166, 35, 0.16), transparent 60%),
     radial-gradient(1000px 500px at 100% 0%, rgba(236, 72, 153, 0.12), transparent 55%),
     var(--color-ink-950);
   color: var(--color-frost-100);

@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { pool } from '../db/pool.js';
 import { requireAuth } from '../middleware/auth.js';
+import { ah } from '../utils/async-handler.js';
 
 export const gamesRouter = Router();
 
@@ -75,21 +76,27 @@ gamesRouter.post('/games', requireAuth, async (req, res) => {
 });
 
 // GET /api/progress — this user's best result per level (replaces progress.cfg).
-gamesRouter.get('/progress', requireAuth, async (req, res) => {
-  const [rows] = await pool.query(
-    `SELECT level_id, best_stars, best_score, best_time_seconds
+gamesRouter.get(
+  '/progress',
+  requireAuth,
+  ah(async (req, res) => {
+    const [rows] = await pool.query(
+      `SELECT level_id, best_stars, best_score, best_time_seconds
        FROM level_progress WHERE user_id = ? ORDER BY level_id`,
-    [req.user.id]
-  );
-  res.json({ progress: rows });
-});
+      [req.user.id]
+    );
+    res.json({ progress: rows });
+  })
+);
 
 // GET /api/ranking — public leaderboard, aggregated per player.
 // Shows players who have at least one game.
-gamesRouter.get('/ranking', async (req, res) => {
-  const limit = Math.min(Number(req.query.limit) || 100, 500);
-  const [rows] = await pool.query(
-    `SELECT
+gamesRouter.get(
+  '/ranking',
+  ah(async (req, res) => {
+    const limit = Math.min(Number(req.query.limit) || 100, 500);
+    const [rows] = await pool.query(
+      `SELECT
         u.id,
         u.username,
         u.sexo,
@@ -108,10 +115,11 @@ gamesRouter.get('/ranking', async (req, res) => {
      GROUP BY u.id
      ORDER BY punt_media DESC, mejor_punt DESC
      LIMIT ?`,
-    [limit]
-  );
-  res.json({ ranking: rows });
-});
+      [limit]
+    );
+    res.json({ ranking: rows });
+  })
+);
 
 function clampInt(v) {
   const n = Math.floor(Number(v));
