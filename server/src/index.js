@@ -1,13 +1,14 @@
 import express from 'express';
 import cors from 'cors';
 import { config } from './config.js';
+import { buildCorsOrigin } from './cors-origin.js';
 import { pool } from './db/pool.js';
 import { authRouter } from './routes/auth.js';
 import { gamesRouter } from './routes/games.js';
 import { adminRouter } from './routes/admin.js';
 
 const app = express();
-app.use(cors({ origin: config.corsOrigin }));
+app.use(cors({ origin: buildCorsOrigin(config.corsOrigin) }));
 app.use(express.json());
 
 // Health check.
